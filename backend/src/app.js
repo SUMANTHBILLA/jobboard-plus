@@ -14,4 +14,15 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "OK", time: new Date() });
 });
 
+const Test = require("./models/Test");
+
+app.get("/api/test", async (req, res) => {
+  try {
+    const doc = await Test.create({ message: "MongoDB is working!" });
+    res.json(doc);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = app;
